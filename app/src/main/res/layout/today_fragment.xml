@@ -1,0 +1,97 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:background="@color/gray5"
+>
+  <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+
+          android:layout_height="match_parent"
+  >
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+                  seekarc:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
+                  seekarc:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                  android:layout_marginStart="16dp" seekarc:layout_constraintEnd_toEndOf="parent"
+                  android:layout_marginRight="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                  seekarc:layout_constraintBottom_toBottomOf="parent"
+                  android:background="@drawable/rounded_white"
+                  android:orientation="vertical"
+    >
+      <RelativeLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+      >
+        <com.triggertrap.seekarc.SeekArc
+                android:layout_alignParentTop="true"
+                android:id="@+id/seekArc"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="50dp"
+                seekarc:rotation="180"
+                seekarc:startAngle="30"
+                seekarc:sweepAngle="300"
+                seekarc:touchInside="false"
+                seekarc:arcColor="@color/gray5"
+                seekarc:arcWidth="15dp"
+                seekarc:enabled="false"
+                seekarc:progressColor="@color/colorAccent"
+                seekarc:progress="68"
+                seekarc:progressWidth="15dp"
+                seekarc:roundEdges="true"
+                android:layout_marginTop="1dp"/>
+        <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7521"
+                android:textSize="48sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+        />
+        <TextView
+                android:layout_alignBottom="@id/seekArc"
+                android:layout_marginBottom="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="steps"
+                android:textSize="24sp"
+                android:textColor="@color/gray2"
+                android:textStyle="bold"
+        />
+      </RelativeLayout>
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingHorizontal="40dp"
+      >
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="75% of active Goal Name 1 of 10 000 steps"
+                android:textColor="@color/gray2"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_weight="1"
+        />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+        >
+          <include
+                  layout="@layout/primary_button"
+          />
+        </LinearLayout>
+
+      </LinearLayout>
+    </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

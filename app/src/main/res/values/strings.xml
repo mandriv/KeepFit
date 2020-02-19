@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">KeepFit</string>
+    <string name="title_today">Today</string>
+    <string name="title_goals">Goals</string>
+</resources>
