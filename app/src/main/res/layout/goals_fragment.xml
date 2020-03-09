@@ -46,7 +46,7 @@
             android:layout_margin="16dp"
             app:backgroundTint="@color/colorAccent"
             app:tint="@color/whitePrimary"
-            android:onClick="@{() -> viewModel.onNewGoalPress(context)}"/>
+    />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

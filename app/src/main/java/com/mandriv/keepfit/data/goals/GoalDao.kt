@@ -19,4 +19,7 @@ interface GoalDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(plants: List<Goal>)
+
+    @Query("UPDATE goals SET isActive = 0 WHERE isActive = 1")
+    suspend fun resetActiveGoals()
 }

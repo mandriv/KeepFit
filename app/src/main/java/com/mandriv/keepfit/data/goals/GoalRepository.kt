@@ -13,13 +13,21 @@ class GoalRepository private constructor(private val goalDao: GoalDao) {
         return goalDao.getActiveGoal();
     }
 
-    companion object {
-    // For Singleton instantiation
-    @Volatile private var instance: GoalRepository? = null
+    suspend fun resetActiveGoals() {
+        return goalDao.resetActiveGoals()
+    }
 
-    fun getInstance(goalDao: GoalDao) =
-        instance ?: synchronized(this) {
-            instance ?: GoalRepository(goalDao).also { instance = it }
-        }
+    suspend fun insert(goal: Goal): Long {
+        return goalDao.insert(goal)
+    }
+
+    companion object {
+        // For Singleton instantiation
+        @Volatile private var instance: GoalRepository? = null
+
+        fun getInstance(goalDao: GoalDao) =
+            instance ?: synchronized(this) {
+                instance ?: GoalRepository(goalDao).also { instance = it }
+            }
     }
 }

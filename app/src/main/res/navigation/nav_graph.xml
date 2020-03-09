@@ -14,8 +14,14 @@
   <fragment
           android:id="@+id/goals"
           android:name="com.mandriv.keepfit.ui.goals.GoalsFragment"
-          android:label="@string/title_today"
+          android:label="@string/title_goals"
           tools:layout="@layout/goals_fragment">
+    <action android:id="@+id/action_goals_to_newGoalDialogFragment" app:destination="@id/newGoalDialogFragment"/>
   </fragment>
+  <dialog android:id="@+id/newGoalDialogFragment"
+          android:name="com.mandriv.keepfit.ui.newgoal.NewGoalDialogFragment"
+          android:label="NewGoalDialogFragment"
+          tools:layout="@layout/new_goal_dialog_fragment"
+  />
 
 </navigation>

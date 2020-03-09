@@ -4,6 +4,7 @@ import android.content.Context
 import com.mandriv.keepfit.data.AppDatabase
 import com.mandriv.keepfit.data.goals.GoalRepository
 import com.mandriv.keepfit.ui.goals.GoalsViewModelFactory
+import com.mandriv.keepfit.ui.newgoal.NewGoalViewModelFactory
 
 object InjectorUtils {
 
@@ -17,5 +18,12 @@ object InjectorUtils {
     ): GoalsViewModelFactory {
         val repository = getGoalsRepository(context)
         return GoalsViewModelFactory(repository)
+    }
+
+    fun provideNewGoalViewModelFactory(
+        context: Context
+    ): NewGoalViewModelFactory {
+        val repository = getGoalsRepository(context)
+        return NewGoalViewModelFactory(repository)
     }
 }
