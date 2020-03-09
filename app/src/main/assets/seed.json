@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "value": 10000,
+    "name": "Initial goal",
+    "isActive": true
+  }
+]

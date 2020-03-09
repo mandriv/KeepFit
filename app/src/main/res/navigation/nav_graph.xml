@@ -13,7 +13,7 @@
   </fragment>
   <fragment
           android:id="@+id/goals"
-          android:name="com.mandriv.keepfit.ui.GoalsFragment"
+          android:name="com.mandriv.keepfit.ui.goals.GoalsFragment"
           android:label="@string/title_today"
           tools:layout="@layout/goals_fragment">
   </fragment>
