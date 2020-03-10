@@ -1,27 +1,26 @@
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent" xmlns:seekarc="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
+        android:background="@color/background_color"
 >
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <com.google.android.material.card.MaterialCardView
           android:layout_width="match_parent"
-
-          android:layout_height="match_parent"
-  >
-    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
-                  seekarc:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
-                  seekarc:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
-                  android:layout_marginStart="16dp" seekarc:layout_constraintEnd_toEndOf="parent"
-                  android:layout_marginRight="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
-                  seekarc:layout_constraintBottom_toBottomOf="parent"
-                  android:orientation="vertical"
-    >
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent" android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+          android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
+          app:layout_constraintBottom_toTopOf="@+id/fab">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content">
       <RelativeLayout
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-      >
+              android:layout_height="250dp"
+              app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent" android:id="@+id/relativeLayout">
         <com.triggertrap.seekarc.SeekArc
+                xmlns:seekarc="http://schemas.android.com/apk/res-auto"
                 android:layout_alignParentTop="true"
                 android:id="@+id/seekArc"
                 android:layout_width="match_parent"
@@ -61,12 +60,19 @@
                 android:textStyle="bold"
         />
       </RelativeLayout>
+
       <LinearLayout
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:paddingHorizontal="40dp"
-      >
+              android:paddingLeft="40dp"
+              android:paddingStart="40dp"
+              android:paddingRight="40dp"
+              android:paddingEnd="40dp"
+              app:layout_constraintTop_toBottomOf="@+id/relativeLayout" app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+              android:layout_marginTop="32dp"
+              android:layout_marginBottom="32dp">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,18 +84,18 @@
                 android:gravity="center"
                 android:layout_weight="1"
         />
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="1"
-        >
-          <include
-                  layout="@layout/primary_button"
-          />
-        </LinearLayout>
-
       </LinearLayout>
-    </LinearLayout>
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:id="@+id/fab"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:src="@drawable/ic_add_black_24dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          app:backgroundTint="@color/colorAccent"
+          app:tint="@color/whitePrimary"
+  />
+</androidx.constraintlayout.widget.ConstraintLayout>
