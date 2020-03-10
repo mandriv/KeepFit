@@ -1,15 +1,14 @@
-package com.mandriv.keepfit.ui.goals
+package com.mandriv.keepfit.viewmodel.newgoal
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mandriv.keepfit.data.goals.GoalRepository
 
-class GoalsViewModelFactory(
-    private val repository: GoalRepository
+class NewGoalViewModelFactory(
+    private val goalsRepository: GoalRepository
 ) : ViewModelProvider.NewInstanceFactory() {
-
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return GoalsViewModel(repository) as T
+        return NewGoalViewModel(goalsRepository) as T
     }
 }

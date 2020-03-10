@@ -6,10 +6,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
+
 @Dao
 interface GoalDao {
     @Query("SELECT * from goals")
     fun getAllGoals(): LiveData<List<Goal>>
+
+    @Query("SELECT * from goals WHERE isActive = 0")
+    fun getInactiveGoals(): LiveData<List<Goal>>
 
     @Query("SELECT * from goals WHERE isActive = 1 LIMIT 1")
     fun getActiveGoal(): LiveData<Goal>
@@ -18,8 +22,14 @@ interface GoalDao {
     suspend fun insert(goal: Goal): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSingle(goal: Goal)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(plants: List<Goal>)
 
     @Query("UPDATE goals SET isActive = 0 WHERE isActive = 1")
     suspend fun resetActiveGoals()
+
+    @Query("SELECT COUNT(*) FROM goals")
+    fun count(): Int
 }

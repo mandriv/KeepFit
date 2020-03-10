@@ -3,8 +3,8 @@ package com.mandriv.keepfit.utilities
 import android.content.Context
 import com.mandriv.keepfit.data.AppDatabase
 import com.mandriv.keepfit.data.goals.GoalRepository
-import com.mandriv.keepfit.ui.goals.GoalsViewModelFactory
-import com.mandriv.keepfit.ui.newgoal.NewGoalViewModelFactory
+import com.mandriv.keepfit.viewmodel.goals.GoalsViewModelFactory
+import com.mandriv.keepfit.viewmodel.newgoal.NewGoalViewModelFactory
 
 object InjectorUtils {
 

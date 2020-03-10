@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">KeepFit</string>
-    <string name="title_today">Today</string>
-    <string name="title_goals">Goals</string>
-    <string name="add_new_goal_title">Add new goal</string>
-    <string name="name">Name</string>
-    <string name="steps">Steps</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="set_active">Set as active</string>
+  <string name="app_name">KeepFit</string>
+  <string name="title_today">Today</string>
+  <string name="title_goals">Goals</string>
+  <string name="add_new_goal_title">Add new goal</string>
+  <string name="name">Name</string>
+  <string name="steps">Steps</string>
+  <string name="save">Save</string>
+  <string name="cancel">Cancel</string>
+  <string name="set_active">Set as active</string>
+  <string name="active_goal">Active goal</string>
+  <string name="other_goals">Other goals</string>
 </resources>

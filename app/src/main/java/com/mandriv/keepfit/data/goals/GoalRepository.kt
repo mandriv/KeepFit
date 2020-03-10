@@ -1,16 +1,19 @@
 package com.mandriv.keepfit.data.goals
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 
 class GoalRepository private constructor(private val goalDao: GoalDao) {
 
     fun getAllGoals(): LiveData<List<Goal>> {
-        return goalDao.getAllGoals();
+        return goalDao.getAllGoals()
+    }
+
+    fun getInactiveGoals(): LiveData<List<Goal>> {
+        return goalDao.getInactiveGoals()
     }
 
     fun getActiveGoal(): LiveData<Goal> {
-        return goalDao.getActiveGoal();
+        return goalDao.getActiveGoal()
     }
 
     suspend fun resetActiveGoals() {

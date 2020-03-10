@@ -5,37 +5,92 @@
         xmlns:tools="http://schemas.android.com/tools">
   <data>
     <import type="com.mandriv.keepfit.data.goals.Goal" />
-    <variable name="viewModel" type="com.mandriv.keepfit.ui.goals.GoalsViewModel"/>
+    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.goals.GoalsViewModel"/>
   </data>
   <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
-          android:layout_height="match_parent">
-
-    <TextView
+          android:layout_height="match_parent"
+          android:background="@color/background_color"
+  >
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/active_goal_text_view"
-            android:text="@{viewModel.test}"
-    />
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/active_goal_text_view2"
-            android:text="@{viewModel.activeGoal.name}"
-    />
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/goals_recycle_view"
-            android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:listitem="@layout/goal_item"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/active_goal_text_view"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.021"/>
+            android:orientation="vertical"
+            android:padding="16dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+      <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/active_goal"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:textColor="@color/gray2"
+      />
+      <com.google.android.material.card.MaterialCardView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:layout_marginBottom="8dp"
+              app:contentPadding="16dp"
+      >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+          <TextView
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:scrollHorizontally="true"
+                  android:ellipsize="end"
+                  android:maxLines="1"
+                  android:textSize="16sp"
+                  android:textColor="@color/text_black"
+                  android:text="@{viewModel.activeGoalName}"
+          />
+          <TextView
+                  android:paddingLeft="8dp"
+                  android:paddingStart="8dp"
+                  android:paddingRight="0dp"
+                  android:paddingEnd="0dp"
+                  android:minWidth="50dp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:gravity="end"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  android:text="@{viewModel.activeGoalValue}"
+          />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+      <TextView
+              android:layout_marginTop="8dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/other_goals"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:textColor="@color/gray2"
+      />
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
+              android:paddingBottom="75dp"
+      >
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/goal_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:context=".MainActivity"
+                tools:listitem="@layout/goal_item"
+        />
+      </LinearLayout>
+    </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,6 +102,5 @@
             app:backgroundTint="@color/colorAccent"
             app:tint="@color/whitePrimary"
     />
-
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

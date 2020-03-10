@@ -11,4 +11,5 @@ data class Goal(
     val isActive: Boolean
 ) {
     override fun toString() = name
+    fun getValueString() = value.toString()
 }
