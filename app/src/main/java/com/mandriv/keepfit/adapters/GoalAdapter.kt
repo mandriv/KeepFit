@@ -1,12 +1,18 @@
 package com.mandriv.keepfit.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mandriv.keepfit.R
 import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.databinding.GoalItemBinding
+import com.mandriv.keepfit.view.goals.GoalsFragmentDirections
 
 class GoalAdapter : ListAdapter<Goal, RecyclerView.ViewHolder>(GoalDiffCallback()) {
 
@@ -27,27 +33,30 @@ class GoalAdapter : ListAdapter<Goal, RecyclerView.ViewHolder>(GoalDiffCallback(
         private val binding: GoalItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
-            /*
             binding.setClickListener {
-                binding.plant?.let { plant ->
-                    navigateToPlant(plant, it)
+                binding.goal?.let { goal ->
+                    navigateToGoal(goal, it)
                 }
             }
-             */
         }
 
-        /*
-        private fun navigateToPlant(
-            plant: Plant,
+        private fun getClickListener(goalId: Int): View.OnClickListener {
+            val listener = Navigation.createNavigateOnClickListener(
+                R.id.action_goals_to_editGoalDialogFragment,
+                bundleOf("goalId" to goalId)
+            )
+            return listener
+        }
+
+        private fun navigateToGoal(
+            goal: Goal,
             view: View
         ) {
             val direction =
-                HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(
-                    plant.plantId
-                )
+                GoalsFragmentDirections.actionGoalsToEditGoalDialogFragment(goal.id)
             view.findNavController().navigate(direction)
         }
-         */
+
 
         fun bind(item: Goal) {
             binding.apply {

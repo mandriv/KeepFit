@@ -3,6 +3,7 @@ package com.mandriv.keepfit.utilities
 import android.content.Context
 import com.mandriv.keepfit.data.AppDatabase
 import com.mandriv.keepfit.data.goals.GoalRepository
+import com.mandriv.keepfit.viewmodel.editgoal.EditGoalViewModelFactory
 import com.mandriv.keepfit.viewmodel.goals.GoalsViewModelFactory
 import com.mandriv.keepfit.viewmodel.newgoal.NewGoalViewModelFactory
 
@@ -26,4 +27,13 @@ object InjectorUtils {
         val repository = getGoalsRepository(context)
         return NewGoalViewModelFactory(repository)
     }
+
+    fun provideEditGoalViewModelFactory(
+        context: Context,
+        goalId: Int
+    ): EditGoalViewModelFactory {
+        val repository = getGoalsRepository(context)
+        return EditGoalViewModelFactory(repository, goalId)
+    }
+
 }

@@ -3,6 +3,7 @@
   <string name="title_today">Today</string>
   <string name="title_goals">Goals</string>
   <string name="add_new_goal_title">Add new goal</string>
+  <string name="edit_goal_title">Edit goal</string>
   <string name="name">Name</string>
   <string name="steps">Steps</string>
   <string name="save">Save</string>

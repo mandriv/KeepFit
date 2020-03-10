@@ -18,7 +18,7 @@
       <androidx.appcompat.widget.Toolbar
               android:id="@+id/toolbar"
               android:layout_width="match_parent"
-              android:layout_height="?attr/actionBarSize"
+              android:layout_height="?android:attr/actionBarSize"
               android:paddingEnd="16dp"
               android:paddingRight="16dp"
               android:paddingStart="6dp"
@@ -64,7 +64,8 @@
                     android:id="@+id/new_goal_value_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberSigned"
+                    android:digits="0123456789"
+                    android:inputType="numberDecimal"
                     android:text="@={viewModel.newGoalValue}"
             />
           </com.google.android.material.textfield.TextInputLayout>

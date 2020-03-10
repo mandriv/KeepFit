@@ -8,6 +8,7 @@
     <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.goals.GoalsViewModel"/>
   </data>
   <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/goals_root"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:background="@color/background_color"
@@ -73,23 +74,15 @@
               android:textStyle="bold"
               android:textColor="@color/gray2"
       />
-      <LinearLayout
+      <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/goal_list"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              app:layout_behavior="@string/appbar_scrolling_view_behavior"
-              android:paddingBottom="75dp"
-      >
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/goal_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:context=".MainActivity"
-                tools:listitem="@layout/goal_item"
-        />
-      </LinearLayout>
+              android:layout_height="wrap_content"
+              android:scrollbars="vertical"
+              app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+              tools:context=".MainActivity"
+              tools:listitem="@layout/goal_item"
+      />
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

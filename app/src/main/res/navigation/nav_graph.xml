@@ -13,15 +13,25 @@
   </fragment>
   <fragment
           android:id="@+id/goals"
-          android:name="com.mandriv.keepfit.view.GoalsFragment"
+          android:name="com.mandriv.keepfit.view.goals.GoalsFragment"
           android:label="@string/title_goals"
           tools:layout="@layout/goals_fragment">
     <action android:id="@+id/action_goals_to_newGoalDialogFragment" app:destination="@id/newGoalDialogFragment"/>
+    <action android:id="@+id/action_goals_to_editGoalDialogFragment" app:destination="@id/editGoalDialogFragment"/>
   </fragment>
   <dialog android:id="@+id/newGoalDialogFragment"
           android:name="com.mandriv.keepfit.view.NewGoalDialogFragment"
           android:label="NewGoalDialogFragment"
           tools:layout="@layout/new_goal_dialog_fragment"
   />
+  <dialog android:id="@+id/editGoalDialogFragment"
+          android:name="com.mandriv.keepfit.view.EditGoalDialogFragment"
+          android:label="EditGoalDialogFramgnet"
+          tools:layout="@layout/edit_goal_dialog_fragment"
+  >
+    <argument
+            android:name="goalId"
+            app:argType="integer"/>
+  </dialog>
 
 </navigation>
