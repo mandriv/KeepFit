@@ -13,7 +13,7 @@
   </fragment>
   <fragment
           android:id="@+id/goals"
-          android:name="com.mandriv.keepfit.view.goals.GoalsFragment"
+          android:name="com.mandriv.keepfit.view.GoalsFragment"
           android:label="@string/title_goals"
           tools:layout="@layout/goals_fragment">
     <action android:id="@+id/action_goals_to_newGoalDialogFragment" app:destination="@id/newGoalDialogFragment"/>

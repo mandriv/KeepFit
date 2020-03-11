@@ -1,101 +1,133 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+<?xml version="1.0" encoding="utf-8"?>
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color"
 >
-  <com.google.android.material.card.MaterialCardView
+  <data>
+    <import type="com.mandriv.keepfit.data.goals.Goal"/>
+    <import type="com.mandriv.keepfit.data.steps.StepsEntry"/>
+    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.today.TodayViewModel"/>
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent" android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
-          android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
-          app:layout_constraintBottom_toTopOf="@+id/fab">
-    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-                                                       android:layout_height="wrap_content">
-      <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="250dp"
-              app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toEndOf="parent" android:id="@+id/relativeLayout">
-        <com.triggertrap.seekarc.SeekArc
-                xmlns:seekarc="http://schemas.android.com/apk/res-auto"
-                android:layout_alignParentTop="true"
-                android:id="@+id/seekArc"
+          android:layout_height="match_parent"
+          android:background="@color/background_color"
+  >
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+            android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/fab">
+      <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                         android:layout_height="wrap_content">
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:padding="50dp"
-                seekarc:rotation="180"
-                seekarc:startAngle="30"
-                seekarc:sweepAngle="300"
-                seekarc:touchInside="false"
-                seekarc:arcColor="@color/gray5"
-                seekarc:arcWidth="15dp"
-                seekarc:enabled="false"
-                seekarc:progressColor="@color/colorAccent"
-                seekarc:progress="68"
-                seekarc:progressWidth="15dp"
-                seekarc:roundEdges="true"
-                android:layout_marginTop="1dp"/>
-        <TextView
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7521"
-                android:textSize="48sp"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-        />
-        <TextView
-                android:layout_alignBottom="@id/seekArc"
-                android:layout_marginBottom="15dp"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="steps"
-                android:textSize="24sp"
-                android:textColor="@color/gray2"
-                android:textStyle="bold"
-        />
-      </RelativeLayout>
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:id="@+id/relativeLayout">
+          <com.triggertrap.seekarc.SeekArc
+                  xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+                  android:layout_alignParentTop="true"
+                  android:id="@+id/seekArc"
+                  android:layout_width="match_parent"
+                  android:layout_height="250dp"
+                  android:padding="50dp"
+                  seekarc:rotation="180"
+                  seekarc:startAngle="30"
+                  seekarc:sweepAngle="300"
+                  seekarc:touchInside="false"
+                  seekarc:arcColor="@color/gray5"
+                  seekarc:arcWidth="15dp"
+                  seekarc:enabled="false"
+                  seekarc:progressColor="@color/colorAccent"
+                  seekarc:progress="0"
+                  seekarc:progressWidth="15dp"
+                  seekarc:roundEdges="true"
+                  android:layout_marginTop="1dp"/>
+          <TextView
+                  android:layout_centerHorizontal="true"
+                  android:layout_centerVertical="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@{viewModel.stepsCountToday}"
+                  android:textSize="48sp"
+                  android:textColor="@color/colorPrimary"
+                  android:textStyle="bold"
+          />
+          <TextView
+                  android:layout_alignBottom="@id/seekArc"
+                  android:layout_marginBottom="15dp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/steps_lowercase"
+                  android:textSize="24sp"
+                  android:textColor="@color/gray2"
+                  android:textStyle="bold"
+          />
+        </RelativeLayout>
 
-      <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:paddingLeft="40dp"
-              android:paddingStart="40dp"
-              android:paddingRight="40dp"
-              android:paddingEnd="40dp"
-              app:layout_constraintTop_toBottomOf="@+id/relativeLayout" app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-              android:layout_marginTop="32dp"
-              android:layout_marginBottom="32dp">
-        <TextView
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="75% of active Goal Name 1 of 10 000 steps"
-                android:textColor="@color/gray2"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:layout_weight="1"
-        />
-      </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-  </com.google.android.material.card.MaterialCardView>
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-          android:id="@+id/fab"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          android:src="@drawable/ic_add_black_24dp"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
-          app:backgroundTint="@color/colorAccent"
-          app:tint="@color/whitePrimary"
-  />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                android:orientation="vertical"
+                android:paddingLeft="40dp"
+                android:paddingStart="40dp"
+                android:paddingRight="40dp"
+                android:paddingEnd="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp">
+          <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:text="@{viewModel.percentageCompleted + `% completed`}"
+                  android:textColor="@color/gray2"
+                  android:textStyle="bold"
+                  android:textSize="24sp"
+                  android:textAlignment="center"
+                  android:gravity="center"
+                  android:layout_weight="1"
+          />
+          <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:text="@{viewModel.activeGoalName}"
+                  android:textColor="@color/gray2"
+                  android:textStyle="bold"
+                  android:textSize="24sp"
+                  android:textAlignment="center"
+                  android:gravity="center"
+                  android:layout_weight="1"
+          />
+          <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="0dp"
+                  android:text="@{viewModel.activeGoalValue + ` steps`}"
+                  android:textColor="@color/gray2"
+                  android:textStyle="bold"
+                  android:textSize="24sp"
+                  android:textAlignment="center"
+                  android:gravity="center"
+                  android:layout_weight="1"
+          />
+        </LinearLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_add_black_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:backgroundTint="@color/colorAccent"
+            app:tint="@color/whitePrimary"
+            android:onClick="@{() -> viewModel.onOpenAddStepsDialog(context)}"
+    />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

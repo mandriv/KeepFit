@@ -1,14 +1,21 @@
 package com.mandriv.keepfit.data.steps
 
+import androidx.lifecycle.LiveData
+
 class StepsRepository private constructor(private val stepsDao: StepsDao) {
 
-    fun getTodaySteps() = stepsDao.getTodayStepEntries()
+    fun getTodayStepEntry(): LiveData<StepsEntry> {
+        return stepsDao.getTodayStepEntry()
+    }
 
-    fun getAllSteps() = stepsDao.getStepEntries()
+    suspend fun addTodaySteps(steps: Int) {
+        return stepsDao.addTodaySteps(steps)
+    }
 
     companion object {
         // For Singleton instantiation
-        @Volatile private var instance: StepsRepository? = null
+        @Volatile
+        private var instance: StepsRepository? = null
 
         fun getInstance(stepsDao: StepsDao) =
             instance ?: synchronized(this) {

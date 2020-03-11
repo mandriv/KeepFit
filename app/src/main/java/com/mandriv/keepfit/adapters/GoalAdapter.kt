@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mandriv.keepfit.R
 import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.databinding.GoalItemBinding
-import com.mandriv.keepfit.view.goals.GoalsFragmentDirections
+import com.mandriv.keepfit.view.GoalsFragmentDirections
 
 class GoalAdapter : ListAdapter<Goal, RecyclerView.ViewHolder>(GoalDiffCallback()) {
 

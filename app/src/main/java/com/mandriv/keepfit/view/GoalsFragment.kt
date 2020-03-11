@@ -1,4 +1,4 @@
-package com.mandriv.keepfit.view.goals
+package com.mandriv.keepfit.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +17,7 @@ import com.mandriv.keepfit.adapters.GoalAdapter
 import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.databinding.GoalsFragmentBinding
 import com.mandriv.keepfit.utilities.InjectorUtils
+import com.mandriv.keepfit.utilities.SwipeToDeleteCallback
 import com.mandriv.keepfit.viewmodel.goals.GoalsViewModel
 import kotlinx.android.synthetic.main.goals_fragment.*
 
