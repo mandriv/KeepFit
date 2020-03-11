@@ -21,4 +21,11 @@ data class StepsEntry(
     val stepCount: Int,
     val addedAt: Calendar = Calendar.getInstance(),
     val goalId: Int?
-)
+) {
+    fun getStepCountString() = stepCount.toString()
+    fun getGoalString() = goalId.toString()
+
+    override fun toString(): String {
+        return "id: ${id}, stepCount: ${stepCount}, addedAt: ${addedAt.time.toString()}, goal: ${goalId}"
+    }
+}

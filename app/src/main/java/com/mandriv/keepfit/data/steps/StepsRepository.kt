@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 
 class StepsRepository private constructor(private val stepsDao: StepsDao) {
 
+    fun getHistoryEntries(): LiveData<List<HistoryEntry>> {
+        return stepsDao.getAllHistoryEntries()
+    }
+
     fun getTodayStepEntry(): LiveData<StepsEntry> {
         return stepsDao.getTodayStepEntry()
     }

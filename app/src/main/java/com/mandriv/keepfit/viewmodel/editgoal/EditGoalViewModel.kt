@@ -20,6 +20,8 @@ class EditGoalViewModel(
     val newGoalValue = MutableLiveData<String>()
     val newGoalActive = MutableLiveData<Boolean>()
 
+    val edited = MutableLiveData<Boolean>(false)
+
     fun updateFields(updatedGoal: Goal) {
         newGoalName.value = updatedGoal.name
         newGoalValue.value = updatedGoal.value.toString()
@@ -29,6 +31,7 @@ class EditGoalViewModel(
     private fun update(goal: Goal) {
         viewModelScope.launch {
             goalsRepository.update(goal)
+            edited.value = true
         }
     }
 
@@ -39,7 +42,6 @@ class EditGoalViewModel(
             val isActive: Boolean = newGoalActive.value ?: false
             val newGoal = Goal(goalId, value, name, isActive)
             update(newGoal)
-            return true
         }
         return false
     }

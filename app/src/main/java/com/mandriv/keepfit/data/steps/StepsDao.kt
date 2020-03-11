@@ -1,5 +1,6 @@
 package com.mandriv.keepfit.data.steps
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -14,6 +15,24 @@ interface StepsDao {
 
     @Query("SELECT * from steps WHERE date(addedAt) = date('now') LIMIT 1")
     fun getTodayStepEntryRaw(): StepsEntry
+
+    @Query(
+        """
+        SELECT 
+            steps.id AS id,
+            steps.stepCount AS stepCount,
+            goals.id AS goalId,
+            goals.value AS goalValue,
+            steps.stepCount * 100 / goals.value AS percentageCompleted
+        FROM steps
+        LEFT JOIN goals ON steps.goalId = goals.id
+        """)
+    fun getAllHistoryEntries(): LiveData<List<HistoryEntry>>
+
+    /*
+    @Query("UPDATE steps SET goalId = :goalId WHERE date(addedAt) = date('now')")
+    fun updateTodayGoal(goalId: Int)
+     */
 
     @Update
     fun update(stepsEntry: StepsEntry)

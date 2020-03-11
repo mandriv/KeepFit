@@ -22,12 +22,6 @@ interface GoalDao {
     @Update
     suspend fun update(goal: Goal)
 
-    @Transaction
-    suspend fun updateAndResetActive(goal: Goal) {
-        resetActiveGoals()
-        update(goal)
-    }
-
     @Delete
     suspend fun delete(goal: Goal)
 

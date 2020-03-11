@@ -1,71 +1,64 @@
 package com.mandriv.keepfit.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mandriv.keepfit.R
 import com.mandriv.keepfit.data.goals.Goal
+import com.mandriv.keepfit.data.steps.HistoryEntry
+import com.mandriv.keepfit.data.steps.StepsEntry
 import com.mandriv.keepfit.databinding.GoalItemBinding
+import com.mandriv.keepfit.databinding.HistoryItemBinding
 import com.mandriv.keepfit.view.GoalsFragmentDirections
 
-class GoalAdapter : ListAdapter<Goal, RecyclerView.ViewHolder>(GoalDiffCallback()) {
+class HistoryAdapter : ListAdapter<HistoryEntry, RecyclerView.ViewHolder>(HistoryEntryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return GoalViewHolder(
-            GoalItemBinding.inflate(
+        return HistoryItemViewHolder(
+            HistoryItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val goal = getItem(position)
-        (holder as GoalViewHolder).bind(goal)
+        val historyEntry = getItem(position)
+        (holder as HistoryItemViewHolder).bind(historyEntry)
     }
 
-    class GoalViewHolder(
-        private val binding: GoalItemBinding
+    class HistoryItemViewHolder(
+        private val binding: HistoryItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
-                binding.goal?.let { goal ->
-                    navigateToGoal(goal, it)
+                binding.historyEntry?.let { historyEntry ->
+                    Log.i("AAA", historyEntry.id.toString())
                 }
             }
         }
 
-        private fun navigateToGoal(
-            goal: Goal,
-            view: View
-        ) {
-            val direction =
-                GoalsFragmentDirections.actionGoalsToEditGoalDialogFragment(goal.id)
-            view.findNavController().navigate(direction)
-        }
 
-
-        fun bind(item: Goal) {
+        fun bind(item: HistoryEntry) {
             binding.apply {
-                goal = item
+                percentageCompleted = "${item.percentageCompleted} %"
+                historyEntry = item
                 executePendingBindings()
             }
         }
     }
 }
 
-private class GoalDiffCallback : DiffUtil.ItemCallback<Goal>() {
+private class HistoryEntryDiffCallback: DiffUtil.ItemCallback<HistoryEntry>() {
 
-    override fun areItemsTheSame(oldItem: Goal, newItem: Goal): Boolean {
+    override fun areItemsTheSame(oldItem: HistoryEntry, newItem: HistoryEntry): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Goal, newItem: Goal): Boolean {
+    override fun areContentsTheSame(oldItem: HistoryEntry, newItem: HistoryEntry): Boolean {
         return oldItem == newItem
     }
 }

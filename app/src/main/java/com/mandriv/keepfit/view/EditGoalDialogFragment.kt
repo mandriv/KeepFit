@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.mandriv.keepfit.R
 import com.mandriv.keepfit.data.goals.Goal
@@ -39,17 +40,17 @@ class EditGoalDialogFragment : FullScreenDialogFragment() {
         toolbar.setNavigationOnClickListener { _ -> dismiss() }
         toolbar.setTitle(R.string.edit_goal_title)
         toolbar.inflateMenu(R.menu.save_menu)
-        fun saveAndDismiss(): Boolean {
-            binding.viewModel!!.onSave()
-            dismiss()
-            return true
+
+        toolbar.setOnMenuItemClickListener { _ -> binding.viewModel!!.onSave() }
+
+        editViewModel.goal.observe(viewLifecycleOwner) { goal ->
+            editViewModel.updateFields(goal)
         }
-        toolbar.setOnMenuItemClickListener { _ -> saveAndDismiss() }
-
-        editViewModel.goal.observe(viewLifecycleOwner, Observer<Goal> {
-            editViewModel.updateFields(it)
-        })
-
+        editViewModel.edited.observe(viewLifecycleOwner) { edited ->
+            if (edited) {
+                dismiss()
+            }
+        }
         return binding.root
     }
 

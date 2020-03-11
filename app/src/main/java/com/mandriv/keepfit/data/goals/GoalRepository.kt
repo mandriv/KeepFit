@@ -1,7 +1,9 @@
 package com.mandriv.keepfit.data.goals
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.mandriv.keepfit.data.steps.StepsDao
+import kotlinx.coroutines.coroutineScope
 
 class GoalRepository private constructor(private val goalDao: GoalDao, private val stepsDao: StepsDao) {
 
@@ -17,22 +19,27 @@ class GoalRepository private constructor(private val goalDao: GoalDao, private v
         return goalDao.getById(id)
     }
 
-    suspend fun insert(goal: Goal): Long {
-        if (goal.isActive) {
-            goalDao.resetActiveGoals()
-            val id = goalDao.insert(goal)
-            stepsDao.updateTodayGoal(goal.id)
-            return id
+    suspend fun insert(goal: Goal) {
+        coroutineScope {
+            if (goal.isActive) {
+                goalDao.resetActiveGoals()
+                val insertedId = goalDao.insert(goal)
+                stepsDao.updateTodayGoal(insertedId.toInt())
+            } else {
+                goalDao.insert(goal)
+            }
         }
-        return goalDao.insert(goal)
     }
 
     suspend fun update(goal: Goal) {
-        if (goal.isActive) {
-            stepsDao.updateTodayGoal(goal.id)
-            goalDao.updateAndResetActive(goal)
+        coroutineScope {
+            if (goal.isActive) {
+                stepsDao.updateTodayGoal(goal.id)
+                goalDao.resetActiveGoals()
+            }
+            goalDao.update(goal)
+
         }
-        return goalDao.update(goal)
     }
 
     suspend fun delete(goal: Goal) {

@@ -1,5 +1,6 @@
 package com.mandriv.keepfit.viewmodel.newgoal
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,9 +16,12 @@ class NewGoalViewModel(
     val newGoalValue = MutableLiveData<String>()
     val newGoalActive = MutableLiveData<Boolean>()
 
+    val inserted = MutableLiveData<Boolean>(false)
+
     private fun insert(goal: Goal) {
         viewModelScope.launch {
             goalsRepository.insert(goal)
+            inserted.value = true
         }
     }
 
@@ -28,9 +32,13 @@ class NewGoalViewModel(
             val isActive: Boolean = newGoalActive.value ?: false
             val newGoal = Goal(0, value, name, isActive)
             insert(newGoal)
-            return true
         }
-        return false
+        return false;
+    }
+
+    override fun onCleared() {
+        Log.i("AAA", "closing")
+        super.onCleared()
     }
 
 }
