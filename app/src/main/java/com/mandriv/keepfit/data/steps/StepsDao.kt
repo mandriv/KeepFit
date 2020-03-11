@@ -22,14 +22,23 @@ interface StepsDao {
     fun insert(stepsEntry: StepsEntry)
 
     @Transaction
-    suspend fun addTodaySteps(steps: Int) {
+    suspend fun updateTodayGoal(goalId: Int) {
+        val stepsEntry = getTodayStepEntryRaw()
+        @Suppress("SENSELESS_COMPARISON")
+        if (stepsEntry != null) {
+            update(StepsEntry(stepsEntry.id, stepsEntry.stepCount, stepsEntry.addedAt, goalId))
+        }
+    }
+
+    @Transaction
+    suspend fun addTodaySteps(steps: Int, goalId: Int) {
         val stepsEntry = getTodayStepEntryRaw()
         @Suppress("SENSELESS_COMPARISON")
         if (stepsEntry != null) {
             val newStepCount: Int = stepsEntry.stepCount + steps
-            update(StepsEntry(stepsEntry.id, newStepCount, stepsEntry.addedAt))
+            update(StepsEntry(stepsEntry.id, newStepCount, stepsEntry.addedAt, stepsEntry.goalId))
         } else {
-            insert(StepsEntry(0, steps))
+            insert(StepsEntry(0, steps, goalId = goalId))
         }
     }
 

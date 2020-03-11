@@ -7,10 +7,10 @@ import androidx.room.*
 @Dao
 interface GoalDao {
 
-    @Query("SELECT * from goals WHERE isActive = 0 ORDER BY value DESC")
+    @Query("SELECT * from goals WHERE isActive = 0 AND isDeleted = 0 ORDER BY value DESC")
     fun getInactiveGoals(): LiveData<List<Goal>>
 
-    @Query("SELECT * from goals WHERE isActive = 1 LIMIT 1")
+    @Query("SELECT * from goals WHERE isActive = 1 AND isDeleted = 0 LIMIT 1")
     fun getActiveGoal(): LiveData<Goal>
 
     @Query("SELECT * FROM goals WHERE id = :goalId LIMIT 1")
@@ -21,6 +21,12 @@ interface GoalDao {
 
     @Update
     suspend fun update(goal: Goal)
+
+    @Transaction
+    suspend fun updateAndResetActive(goal: Goal) {
+        resetActiveGoals()
+        update(goal)
+    }
 
     @Delete
     suspend fun delete(goal: Goal)

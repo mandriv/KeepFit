@@ -33,5 +33,9 @@
             android:name="goalId"
             app:argType="integer"/>
   </dialog>
+  <fragment android:id="@+id/history"
+            android:name="com.mandriv.keepfit.view.HistoryFragment"
+            android:label="@string/history"
+            tools:layout="@layout/history_fragment"/>
 
 </navigation>

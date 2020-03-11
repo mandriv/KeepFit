@@ -6,14 +6,17 @@ import com.mandriv.keepfit.data.goals.GoalRepository
 import com.mandriv.keepfit.data.steps.StepsRepository
 import com.mandriv.keepfit.viewmodel.editgoal.EditGoalViewModelFactory
 import com.mandriv.keepfit.viewmodel.goals.GoalsViewModelFactory
+import com.mandriv.keepfit.viewmodel.history.HistoryViewModelFactory
 import com.mandriv.keepfit.viewmodel.newgoal.NewGoalViewModelFactory
 import com.mandriv.keepfit.viewmodel.today.TodayViewModelFactory
 
 object InjectorUtils {
 
     private fun getGoalsRepository(context: Context): GoalRepository {
+        val database = AppDatabase.getInstance(context.applicationContext)
         return GoalRepository.getInstance(
-            AppDatabase.getInstance(context.applicationContext).goalDao()
+            database.goalDao(),
+            database.stepsDao()
         )
     }
 
@@ -51,6 +54,13 @@ object InjectorUtils {
         val stepsRepository = getStepsRepository(context)
         val goalRepository = getGoalsRepository(context)
         return TodayViewModelFactory(stepsRepository, goalRepository)
+    }
+
+    fun provideHistoryModelFactory(
+        context: Context
+    ): HistoryViewModelFactory {
+        val stepsRepository = getStepsRepository(context)
+        return HistoryViewModelFactory(stepsRepository)
     }
 
 }

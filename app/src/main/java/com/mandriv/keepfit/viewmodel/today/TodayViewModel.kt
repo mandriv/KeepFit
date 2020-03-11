@@ -51,7 +51,7 @@ class TodayViewModel(
         NewStepsEntryAlertBuilder(context, object : NewStepsEntryAlertBuilder.AddStepsListener {
             override fun onAddSteps(steps: Int) {
                 viewModelScope.launch {
-                    stepsRepository.addTodaySteps(steps)
+                    stepsRepository.addTodaySteps(steps, activeGoal.value!!.id)
                 }
             }
         }).create().show()

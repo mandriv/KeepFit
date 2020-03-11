@@ -30,7 +30,8 @@ class GoalsViewModel(private val goalsRepository: GoalRepository) : ViewModel() 
 
     fun restoreGoal(goal: Goal) {
         viewModelScope.launch {
-            goalsRepository.insert(goal)
+            val restoredGoal = Goal(goal.id, goal.value, goal.name, false, false)
+            goalsRepository.update(restoredGoal)
         }
     }
 

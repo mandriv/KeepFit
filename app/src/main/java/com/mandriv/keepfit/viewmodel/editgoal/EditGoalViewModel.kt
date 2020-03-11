@@ -26,16 +26,9 @@ class EditGoalViewModel(
         newGoalActive.value = updatedGoal.isActive
     }
 
-    private fun insert(goal: Goal) {
+    private fun update(goal: Goal) {
         viewModelScope.launch {
-            goalsRepository.insert(goal)
-        }
-    }
-
-    private fun resetActiveAndInsert(goal: Goal) {
-        viewModelScope.launch {
-            goalsRepository.resetActiveGoals()
-            goalsRepository.insert(goal)
+            goalsRepository.update(goal)
         }
     }
 
@@ -45,11 +38,7 @@ class EditGoalViewModel(
             val name: String = newGoalName.value!!
             val isActive: Boolean = newGoalActive.value ?: false
             val newGoal = Goal(goalId, value, name, isActive)
-            if (isActive) {
-                resetActiveAndInsert(newGoal)
-            } else {
-                insert(newGoal)
-            }
+            update(newGoal)
             return true
         }
         return false

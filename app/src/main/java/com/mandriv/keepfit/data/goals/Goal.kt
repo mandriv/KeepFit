@@ -8,7 +8,8 @@ data class Goal(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val value: Int,
     val name: String,
-    val isActive: Boolean
+    val isActive: Boolean,
+    val isDeleted: Boolean = false
 ) {
     override fun toString() = name
     fun getValueString() = value.toString()

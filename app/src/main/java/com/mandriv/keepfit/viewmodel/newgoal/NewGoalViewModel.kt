@@ -21,24 +21,13 @@ class NewGoalViewModel(
         }
     }
 
-    private fun resetActiveAndInsert(goal: Goal) {
-        viewModelScope.launch {
-            goalsRepository.resetActiveGoals()
-            goalsRepository.insert(goal)
-        }
-    }
-
     fun onSave(): Boolean {
         if (newGoalValue.value != null && newGoalName.value != null) {
             val value: Int = newGoalValue.value!!.toInt()
             val name: String = newGoalName.value!!
             val isActive: Boolean = newGoalActive.value ?: false
             val newGoal = Goal(0, value, name, isActive)
-            if (isActive) {
-                resetActiveAndInsert(newGoal)
-            } else {
-                insert(newGoal)
-            }
+            insert(newGoal)
             return true
         }
         return false

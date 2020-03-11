@@ -8,8 +8,8 @@ class StepsRepository private constructor(private val stepsDao: StepsDao) {
         return stepsDao.getTodayStepEntry()
     }
 
-    suspend fun addTodaySteps(steps: Int) {
-        return stepsDao.addTodaySteps(steps)
+    suspend fun addTodaySteps(steps: Int, goalId: Int) {
+        return stepsDao.addTodaySteps(steps, goalId)
     }
 
     companion object {

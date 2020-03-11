@@ -1,18 +1,12 @@
 package com.mandriv.keepfit
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         // Setting Navigation Controller with the BottomNavigationView
         setupBottomNavigationBar(navController)
         // Setting Up ActionBar with Navigation Controller
-        setupActionBar(navController);
+        setupActionBar(navController)
     }
 
     private fun setupBottomNavigationBar(navController: NavController) {
@@ -45,10 +39,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupActionBar(navController: NavController) {
         // Setting Up ActionBar with Navigation Controller
-        var appBarConfiguration = AppBarConfiguration(
-            topLevelDestinationIds = setOf (
+        val appBarConfiguration = AppBarConfiguration(
+            topLevelDestinationIds = setOf(
                 R.id.today,
-                R.id.goals
+                R.id.goals,
+                R.id.history
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
