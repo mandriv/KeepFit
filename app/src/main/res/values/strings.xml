@@ -32,4 +32,10 @@
   <string name="allow_history_delete_desc">Specifies whether past activities can be deleted</string>
   <string name="input_error_numeric">Please provide correct number</string>
   <string name="input_error_name">Please provide proper name</string>
+  <string name="input_list_error">Please pick an item from the list</string>
+  <string name="input_date_error">Please pick a date</string>
+  <string name="bad_date_error">Please choose different date</string>
+  <string name="date">Date</string>
+  <string name="add_historical_activity">Add historical activity</string>
+  <string name="goal">Goal</string>
 </resources>

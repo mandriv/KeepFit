@@ -1,4 +1,4 @@
-package com.mandriv.keepfit.viewmodel.newgoal
+package com.mandriv.keepfit.viewmodel.goals
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

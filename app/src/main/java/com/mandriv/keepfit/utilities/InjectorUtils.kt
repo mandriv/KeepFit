@@ -4,10 +4,11 @@ import android.content.Context
 import com.mandriv.keepfit.data.AppDatabase
 import com.mandriv.keepfit.data.goals.GoalRepository
 import com.mandriv.keepfit.data.steps.StepsRepository
-import com.mandriv.keepfit.viewmodel.editgoal.EditGoalViewModelFactory
+import com.mandriv.keepfit.viewmodel.goals.EditGoalViewModelFactory
 import com.mandriv.keepfit.viewmodel.goals.GoalsViewModelFactory
+import com.mandriv.keepfit.viewmodel.goals.NewGoalViewModelFactory
 import com.mandriv.keepfit.viewmodel.history.HistoryViewModelFactory
-import com.mandriv.keepfit.viewmodel.newgoal.NewGoalViewModelFactory
+import com.mandriv.keepfit.viewmodel.history.NewHistoryViewModelFactory
 import com.mandriv.keepfit.viewmodel.today.TodayViewModelFactory
 
 object InjectorUtils {
@@ -45,7 +46,10 @@ object InjectorUtils {
         goalId: Int
     ): EditGoalViewModelFactory {
         val repository = getGoalsRepository(context)
-        return EditGoalViewModelFactory(repository, goalId)
+        return EditGoalViewModelFactory(
+            repository,
+            goalId
+        )
     }
 
     fun provideTodayViewModelFactory(
@@ -61,6 +65,14 @@ object InjectorUtils {
     ): HistoryViewModelFactory {
         val stepsRepository = getStepsRepository(context)
         return HistoryViewModelFactory(stepsRepository)
+    }
+
+    fun provideNewHistoryViewModelFactory(
+        context: Context
+    ): NewHistoryViewModelFactory {
+        val stepsRepository = getStepsRepository(context)
+        val goalRepository = getGoalsRepository(context)
+        return NewHistoryViewModelFactory(stepsRepository, goalRepository)
     }
 
 }

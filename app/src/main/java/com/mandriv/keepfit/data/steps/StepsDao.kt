@@ -2,6 +2,7 @@ package com.mandriv.keepfit.data.steps
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import java.util.*
 
 @Dao
 interface StepsDao {
@@ -15,6 +16,9 @@ interface StepsDao {
     @Query("SELECT * from steps WHERE date(addedAt) = date('now') LIMIT 1")
     fun getTodayStepEntryRaw(): StepsEntry
 
+    @Query("SELECT * FROM steps WHERE date(addedAt) = date(:date) LIMIT 1")
+    suspend fun getStepsAtDate(date: Calendar): StepsEntry
+
     @Query(
         """
         SELECT 
@@ -27,19 +31,18 @@ interface StepsDao {
         FROM steps
         LEFT JOIN goals ON steps.goalId = goals.id
         ORDER BY datetime(addedAt) DESC
-        """)
+        """
+    )
     fun getAllHistoryEntries(): LiveData<List<HistoryEntry>>
 
-    /*
-    @Query("UPDATE steps SET goalId = :goalId WHERE date(addedAt) = date('now')")
-    fun updateTodayGoal(goalId: Int)
-     */
+    @Delete
+    suspend fun delete(stepsEntry: StepsEntry)
 
     @Update
     fun update(stepsEntry: StepsEntry)
 
     @Insert
-    fun insert(stepsEntry: StepsEntry)
+    suspend fun insert(stepsEntry: StepsEntry)
 
     @Transaction
     suspend fun updateTodayGoal(goalId: Int) {

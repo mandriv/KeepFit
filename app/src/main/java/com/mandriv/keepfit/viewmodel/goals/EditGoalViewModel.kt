@@ -1,4 +1,4 @@
-package com.mandriv.keepfit.viewmodel.editgoal
+package com.mandriv.keepfit.viewmodel.goals
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

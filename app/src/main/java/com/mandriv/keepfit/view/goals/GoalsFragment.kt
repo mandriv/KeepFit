@@ -1,4 +1,4 @@
-package com.mandriv.keepfit.view
+package com.mandriv.keepfit.view.goals
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +21,8 @@ import com.mandriv.keepfit.utilities.InjectorUtils
 import com.mandriv.keepfit.utilities.SwipeToDeleteCallback
 import com.mandriv.keepfit.viewmodel.goals.GoalsViewModel
 import kotlinx.android.synthetic.main.goals_fragment.*
+import kotlinx.android.synthetic.main.goals_fragment.fab
+import kotlinx.android.synthetic.main.history_fragment.*
 
 
 class GoalsFragment : FragmentWithSettingsMenu() {
@@ -101,7 +103,7 @@ class GoalsFragment : FragmentWithSettingsMenu() {
                 val goalToRemove: Goal = adapter.currentList[position]
                 goalsViewModel.removeGoal(goalToRemove)
                 val snackbar = Snackbar.make(
-                    goals_root,
+                    history_root,
                     "Item was removed from the list.",
                     Snackbar.LENGTH_LONG
                 )

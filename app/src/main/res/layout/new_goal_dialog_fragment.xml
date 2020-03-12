@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
   <data>
     <import type="com.mandriv.keepfit.data.goals.Goal" />
-    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.newgoal.NewGoalViewModel"/>
+    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.goals.NewGoalViewModel"/>
   </data>
   <androidx.coordinatorlayout.widget.CoordinatorLayout
        xmlns:app="http://schemas.android.com/apk/res-auto"

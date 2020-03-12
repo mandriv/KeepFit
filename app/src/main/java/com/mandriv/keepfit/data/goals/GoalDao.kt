@@ -16,6 +16,9 @@ interface GoalDao {
     @Query("SELECT * FROM goals WHERE id = :goalId LIMIT 1")
     fun getById(goalId: Int): LiveData<Goal>
 
+    @Query("SELECT * FROM goals WHERE isDeleted = 0 ORDER BY value DESC")
+    fun getNotDeleted(): LiveData<List<Goal>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(goal: Goal): Long
 

@@ -1,5 +1,7 @@
 package com.mandriv.keepfit.adapters
 
+import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -43,19 +45,23 @@ class HistoryAdapter : ListAdapter<HistoryEntry, RecyclerView.ViewHolder>(Histor
         fun bind(item: HistoryEntry) {
             binding.apply {
                 val today = Calendar.getInstance()
+                val locale = getCurrentLocale(binding.root.context)
+                val formatDay = SimpleDateFormat("EEEE", locale)
+                val formatDayMonth = SimpleDateFormat("d MMM", locale)
+                val formatDayMonthYear = SimpleDateFormat("d MMM YYYY", locale)
                 val daysBetween = daysBetween(item.date, today)
                 entryTime = when {
                     daysBetween == 0 -> {
                         "Today"
                     }
                     daysBetween < 7 -> {
-                        SimpleDateFormat("EEEE").format(item.date.time)
+                        formatDay.format(item.date.time)
                     }
                     daysBetween < 365 -> {
-                        SimpleDateFormat("DD/MM").format(item.date.time)
+                        formatDayMonth.format(item.date.time)
                     }
                     else -> {
-                        SimpleDateFormat("DD/MM/YYYY").format(item.date.time)
+                        formatDayMonthYear.format(item.date.time)
                     }
                 }
                 stepsFormatted = "${item.stepCount} steps"
@@ -63,6 +69,15 @@ class HistoryAdapter : ListAdapter<HistoryEntry, RecyclerView.ViewHolder>(Histor
                 percentageCompleted = "${item.percentageCompleted}%"
                 historyEntry = item
                 executePendingBindings()
+            }
+        }
+
+        private fun getCurrentLocale(context: Context): Locale {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                context.resources.configuration.locales.get(0)
+            } else {
+                //noinspection deprecation
+                context.resources.configuration.locale
             }
         }
 

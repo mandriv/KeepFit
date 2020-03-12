@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
   <data>
-    <import type="com.mandriv.keepfit.data.goals.Goal"/>
-    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.goals.EditGoalViewModel"/>
+    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.history.NewHistoryViewModel"/>
   </data>
   <androidx.coordinatorlayout.widget.CoordinatorLayout
           xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +17,7 @@
       <androidx.appcompat.widget.Toolbar
               android:id="@+id/toolbar"
               android:layout_width="match_parent"
-              android:layout_height="?attr/actionBarSize"
+              android:layout_height="?android:attr/actionBarSize"
               android:paddingEnd="16dp"
               android:paddingRight="16dp"
               android:paddingStart="6dp"
@@ -41,22 +40,43 @@
                     android:padding="16dp"
       >
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_goal_name"
+                android:id="@+id/date_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name"
+                android:hint="@string/date"
+                app:errorEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
           <com.google.android.material.textfield.TextInputEditText
-                  android:id="@+id/new_goal_name_input"
+                  android:id="@+id/date_input"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:inputType="textAutoCorrect"
-                  android:text="@={viewModel.newGoalName}"
+                  android:inputType="textNoSuggestions"
+                  android:clickable="true"
+                  android:focusable="true"
+                  android:text="@{viewModel.dateString}"
           />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edit_goal_value"
+                android:id="@+id/goal_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/goal"
+                app:errorEnabled="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        >
+          <AutoCompleteTextView
+                  android:id="@+id/goal_autocomplete"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:editable="false"
+                  android:text="@={viewModel.goalName}"
+          />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/steps_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/steps"
@@ -64,21 +84,14 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
           <com.google.android.material.textfield.TextInputEditText
-                  android:id="@+id/edit_goal_value_input"
+                  android:id="@+id/steps_input"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:digits="0123456789"
                   android:inputType="numberDecimal"
-                  android:text="@={viewModel.newGoalValue}"
+                  android:digits="0123456789"
+                  android:text="@={viewModel.steps}"
           />
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/new_goal_active"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/set_active"
-                android:checked="@={viewModel.newGoalActive}"
-        />
       </LinearLayout>
     </FrameLayout>
   </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-package com.mandriv.keepfit.view
+package com.mandriv.keepfit.view.goals
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.mandriv.keepfit.R
 import com.mandriv.keepfit.databinding.EditGoalDialogFragmentBinding
 import com.mandriv.keepfit.utilities.FullScreenDialogFragment
 import com.mandriv.keepfit.utilities.InjectorUtils
-import com.mandriv.keepfit.viewmodel.editgoal.EditGoalViewModel
+import com.mandriv.keepfit.viewmodel.goals.EditGoalViewModel
 import kotlinx.android.synthetic.main.edit_goal_dialog_fragment.*
 
 

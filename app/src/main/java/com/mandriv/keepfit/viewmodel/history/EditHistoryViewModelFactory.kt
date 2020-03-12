@@ -1,0 +1,3 @@
+package com.mandriv.keepfit.viewmodel.history
+
+class EditHistoryViewModelFactory

@@ -12,8 +12,26 @@ class StepsRepository private constructor(private val stepsDao: StepsDao) {
         return stepsDao.getTodayStepEntry()
     }
 
+    suspend fun delete(entry: StepsEntry) {
+        return stepsDao.delete(entry)
+    }
+
+    suspend fun insert(entry: StepsEntry) {
+        return stepsDao.insert(entry)
+    }
+
     suspend fun addTodaySteps(steps: Int, goalId: Int) {
         return stepsDao.addTodaySteps(steps, goalId)
+    }
+
+    suspend fun insertIfNotPresent(entry: StepsEntry): Boolean {
+        val entryAtDate = stepsDao.getStepsAtDate(entry.addedAt)
+        @Suppress("SENSELESS_COMPARISON")
+        if (entryAtDate != null) {
+            return false
+        }
+        stepsDao.insert(entry)
+        return true
     }
 
     companion object {

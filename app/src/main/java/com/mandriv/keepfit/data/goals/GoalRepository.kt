@@ -1,6 +1,5 @@
 package com.mandriv.keepfit.data.goals
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.mandriv.keepfit.data.steps.StepsDao
 import kotlinx.coroutines.coroutineScope
@@ -13,6 +12,10 @@ class GoalRepository private constructor(private val goalDao: GoalDao, private v
 
     fun getActiveGoal(): LiveData<Goal> {
         return goalDao.getActiveGoal()
+    }
+
+    fun getNotDeleted(): LiveData<List<Goal>> {
+        return goalDao.getNotDeleted()
     }
 
     fun getById(id: Int): LiveData<Goal> {
