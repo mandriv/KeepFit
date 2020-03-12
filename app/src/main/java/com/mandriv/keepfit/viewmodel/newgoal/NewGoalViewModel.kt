@@ -17,6 +17,7 @@ class NewGoalViewModel(
     val newGoalActive = MutableLiveData<Boolean>()
 
     val inserted = MutableLiveData<Boolean>(false)
+    val errorEnabled = MutableLiveData<Boolean>(false)
 
     private fun insert(goal: Goal) {
         viewModelScope.launch {
@@ -26,14 +27,17 @@ class NewGoalViewModel(
     }
 
     fun onSave(): Boolean {
-        if (newGoalValue.value != null && newGoalName.value != null) {
-            val value: Int = newGoalValue.value!!.toInt()
-            val name: String = newGoalName.value!!
-            val isActive: Boolean = newGoalActive.value ?: false
-            val newGoal = Goal(0, value, name, isActive)
-            insert(newGoal)
+        errorEnabled.value = true
+        if (newGoalValue.value.isNullOrBlank() || newGoalName.value.isNullOrBlank()) {
+            return false
         }
-        return false;
+
+        val value: Int = newGoalValue.value!!.toInt()
+        val name: String = newGoalName.value!!
+        val isActive: Boolean = newGoalActive.value ?: false
+        val newGoal = Goal(0, value, name, isActive)
+        insert(newGoal)
+        return false
     }
 
     override fun onCleared() {

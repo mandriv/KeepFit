@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.mandriv.keepfit.R
-import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.databinding.EditGoalDialogFragmentBinding
 import com.mandriv.keepfit.utilities.FullScreenDialogFragment
 import com.mandriv.keepfit.utilities.InjectorUtils
 import com.mandriv.keepfit.viewmodel.editgoal.EditGoalViewModel
+import kotlinx.android.synthetic.main.edit_goal_dialog_fragment.*
 
 
 class EditGoalDialogFragment : FullScreenDialogFragment() {
@@ -49,6 +48,20 @@ class EditGoalDialogFragment : FullScreenDialogFragment() {
         editViewModel.edited.observe(viewLifecycleOwner) { edited ->
             if (edited) {
                 dismiss()
+            }
+        }
+        editViewModel.newGoalName.observe(viewLifecycleOwner) { value ->
+            if (value.isNullOrBlank()) {
+                edit_goal_name.error = resources.getString(R.string.input_error_name)
+            } else {
+                edit_goal_name.error = ""
+            }
+        }
+        editViewModel.newGoalValue.observe(viewLifecycleOwner) { value ->
+            if (value.isNullOrBlank()) {
+                edit_goal_value.error = resources.getString(R.string.input_error_numeric)
+            } else {
+                edit_goal_value.error = ""
             }
         }
         return binding.root

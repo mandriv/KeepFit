@@ -35,7 +35,6 @@ class TodayFragment: Fragment() {
         todayViewModel.percentageCompleted.observe(viewLifecycleOwner) { percentage ->
             seekArc.progress = percentage.toInt()
         }
-
         return binding.root
     }
 

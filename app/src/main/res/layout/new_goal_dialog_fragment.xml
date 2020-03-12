@@ -41,9 +41,11 @@
                       android:padding="16dp"
         >
           <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/new_goal_name"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="@string/name"
+                  app:errorEnabled="@{viewModel.errorEnabled}"
                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           >
             <com.google.android.material.textfield.TextInputEditText
@@ -55,9 +57,11 @@
             />
           </com.google.android.material.textfield.TextInputLayout>
           <com.google.android.material.textfield.TextInputLayout
+                  android:id="@+id/new_goal_value"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="@string/steps"
+                  app:errorEnabled="@{viewModel.errorEnabled}"
                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           >
             <com.google.android.material.textfield.TextInputEditText

@@ -1,7 +1,14 @@
 package com.mandriv.keepfit.viewmodel.today
 
 import android.content.Context
+import android.util.Log
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.*
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import com.mandriv.keepfit.R
 import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.data.goals.GoalRepository
 import com.mandriv.keepfit.data.steps.StepsEntry
@@ -9,6 +16,7 @@ import com.mandriv.keepfit.data.steps.StepsRepository
 import com.mandriv.keepfit.utilities.NewStepsEntryAlertBuilder
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+
 
 class TodayViewModel(
     private val stepsRepository: StepsRepository,
@@ -48,13 +56,23 @@ class TodayViewModel(
     }
 
     fun onOpenAddStepsDialog(context: Context) {
-        NewStepsEntryAlertBuilder(context, object : NewStepsEntryAlertBuilder.AddStepsListener {
-            override fun onAddSteps(steps: Int) {
+        val content = LayoutInflater.from(context).inflate(R.layout.add_steps_form, null)
+        val textInputLayout: TextInputLayout = content.findViewById(R.id.addStepsInputLayout)
+        val textInputEditText: TextInputEditText = content.findViewById(R.id.addStepsInput)
+        textInputEditText.addTextChangedListener { textInputLayout.error = "" }
+        val dialog = NewStepsEntryAlertBuilder(context).create(content)
+        dialog.show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val value: String = textInputEditText.text.toString()
+            if (value.isBlank()) {
+                textInputLayout.error = it.resources.getString(R.string.input_error_numeric)
+            } else {
                 viewModelScope.launch {
-                    stepsRepository.addTodaySteps(steps, activeGoal.value!!.id)
+                    stepsRepository.addTodaySteps(value.toInt(), activeGoal.value!!.id)
+                    dialog.dismiss()
                 }
             }
-        }).create().show()
+        }
     }
 
     private fun getPercentageString(a: Int, b: Int): String {

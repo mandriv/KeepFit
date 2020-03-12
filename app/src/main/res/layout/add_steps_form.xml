@@ -7,6 +7,7 @@
               android:padding="16dp"
 >
   <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/addStepsInputLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:hint="@string/add_steps_hint"

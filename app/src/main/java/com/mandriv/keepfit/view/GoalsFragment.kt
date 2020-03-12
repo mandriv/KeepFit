@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.Navigation
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -16,18 +16,21 @@ import com.mandriv.keepfit.R
 import com.mandriv.keepfit.adapters.GoalAdapter
 import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.databinding.GoalsFragmentBinding
+import com.mandriv.keepfit.utilities.FragmentWithSettingsMenu
 import com.mandriv.keepfit.utilities.InjectorUtils
 import com.mandriv.keepfit.utilities.SwipeToDeleteCallback
 import com.mandriv.keepfit.viewmodel.goals.GoalsViewModel
 import kotlinx.android.synthetic.main.goals_fragment.*
 
 
-class GoalsFragment : Fragment() {
+class GoalsFragment : FragmentWithSettingsMenu() {
 
     private lateinit var adapter: GoalAdapter
     private val goalsViewModel: GoalsViewModel by viewModels {
         InjectorUtils.provideGoalsViewModelFactory(requireContext())
     }
+    private var allowGoalAdd = true
+    private var allowGoalDelete = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,26 +44,41 @@ class GoalsFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
+        setupPreferences()
         adapter = GoalAdapter()
         binding.goalList.adapter = adapter
-
-
         subscribeUi()
+        if (allowGoalAdd) {
+            binding.fab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goals_to_newGoalDialogFragment))
+        } else {
+            binding.fab.hide()
+        }
 
-        binding.fab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goals_to_newGoalDialogFragment))
+        setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enableHidingFabOnScroll()
-        enableSwipeToDeleteAndUndo()
+        if (allowGoalAdd) {
+            enableHidingFabOnScroll()
+        }
+        if (allowGoalDelete) {
+            enableSwipeToDeleteAndUndo()
+        }
     }
+
 
     private fun subscribeUi() {
         goalsViewModel.inactiveGoals.observe(viewLifecycleOwner) { goals ->
             adapter.submitList(goals)
         }
+    }
+
+    private fun setupPreferences() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        allowGoalAdd = sharedPreferences.getBoolean("allow_goal_add", true)
+        allowGoalDelete = sharedPreferences.getBoolean("allow_goal_delete", true)
     }
 
     private fun enableHidingFabOnScroll() {

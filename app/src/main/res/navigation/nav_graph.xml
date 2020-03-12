@@ -37,5 +37,10 @@
             android:name="com.mandriv.keepfit.view.HistoryFragment"
             android:label="@string/history"
             tools:layout="@layout/history_fragment"/>
-
+  <fragment android:id="@+id/settingsFragment"
+            android:name="com.mandriv.keepfit.view.SettingsFragment"
+            android:label="@string/settings"/>
+  <action
+          android:id="@+id/open_settings"
+          app:destination="@id/settingsFragment"/>
 </navigation>

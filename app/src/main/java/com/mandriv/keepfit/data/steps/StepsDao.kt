@@ -1,6 +1,5 @@
 package com.mandriv.keepfit.data.steps
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -20,12 +19,14 @@ interface StepsDao {
         """
         SELECT 
             steps.id AS id,
+            steps.addedAt AS date,
             steps.stepCount AS stepCount,
             goals.id AS goalId,
             goals.value AS goalValue,
             steps.stepCount * 100 / goals.value AS percentageCompleted
         FROM steps
         LEFT JOIN goals ON steps.goalId = goals.id
+        ORDER BY datetime(addedAt) DESC
         """)
     fun getAllHistoryEntries(): LiveData<List<HistoryEntry>>
 

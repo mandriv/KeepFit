@@ -36,13 +36,15 @@ class EditGoalViewModel(
     }
 
     fun onSave(): Boolean {
-        if (newGoalValue.value != null && newGoalName.value != null && newGoalActive.value != null) {
-            val value: Int = newGoalValue.value!!.toInt()
-            val name: String = newGoalName.value!!
-            val isActive: Boolean = newGoalActive.value ?: false
-            val newGoal = Goal(goalId, value, name, isActive)
-            update(newGoal)
+        if (newGoalValue.value.isNullOrBlank() || newGoalName.value.isNullOrBlank()) {
+            return false
         }
+
+        val value: Int = newGoalValue.value!!.toInt()
+        val name: String = newGoalName.value!!
+        val isActive: Boolean = newGoalActive.value ?: false
+        val newGoal = Goal(goalId, value, name, isActive)
+        update(newGoal)
         return false
     }
 

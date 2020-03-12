@@ -3,13 +3,11 @@ package com.mandriv.keepfit.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mandriv.keepfit.R
 import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.databinding.GoalItemBinding
 import com.mandriv.keepfit.view.GoalsFragmentDirections
@@ -44,9 +42,13 @@ class GoalAdapter : ListAdapter<Goal, RecyclerView.ViewHolder>(GoalDiffCallback(
             goal: Goal,
             view: View
         ) {
-            val direction =
-                GoalsFragmentDirections.actionGoalsToEditGoalDialogFragment(goal.id)
-            view.findNavController().navigate(direction)
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(binding.root.context)
+            val allowGoalEdit = sharedPreferences.getBoolean("allow_goal_edit", true)
+            if (allowGoalEdit) {
+                val direction =
+                    GoalsFragmentDirections.actionGoalsToEditGoalDialogFragment(goal.id)
+                view.findNavController().navigate(direction)
+            }
         }
 
 

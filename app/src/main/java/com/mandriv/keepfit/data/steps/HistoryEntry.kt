@@ -1,7 +1,10 @@
 package com.mandriv.keepfit.data.steps
 
+import java.util.*
+
 data class HistoryEntry(
     val id: Int,
+    val date: Calendar,
     val stepCount: Int,
     val goalId: Int,
     val goalValue: Int,

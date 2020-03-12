@@ -2,18 +2,16 @@ package com.mandriv.keepfit.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mandriv.keepfit.data.goals.Goal
 import com.mandriv.keepfit.data.steps.HistoryEntry
-import com.mandriv.keepfit.data.steps.StepsEntry
-import com.mandriv.keepfit.databinding.GoalItemBinding
 import com.mandriv.keepfit.databinding.HistoryItemBinding
-import com.mandriv.keepfit.view.GoalsFragmentDirections
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 class HistoryAdapter : ListAdapter<HistoryEntry, RecyclerView.ViewHolder>(HistoryEntryDiffCallback()) {
 
@@ -44,10 +42,43 @@ class HistoryAdapter : ListAdapter<HistoryEntry, RecyclerView.ViewHolder>(Histor
 
         fun bind(item: HistoryEntry) {
             binding.apply {
-                percentageCompleted = "${item.percentageCompleted} %"
+                val today = Calendar.getInstance()
+                val daysBetween = daysBetween(item.date, today)
+                entryTime = when {
+                    daysBetween == 0 -> {
+                        "Today"
+                    }
+                    daysBetween < 7 -> {
+                        SimpleDateFormat("EEEE").format(item.date.time)
+                    }
+                    daysBetween < 365 -> {
+                        SimpleDateFormat("DD/MM").format(item.date.time)
+                    }
+                    else -> {
+                        SimpleDateFormat("DD/MM/YYYY").format(item.date.time)
+                    }
+                }
+                stepsFormatted = "${item.stepCount} steps"
+                percentage = item.percentageCompleted
+                percentageCompleted = "${item.percentageCompleted}%"
                 historyEntry = item
                 executePendingBindings()
             }
+        }
+
+        private fun daysBetween(startDate: Calendar, endDate: Calendar): Int {
+            val start = Calendar.getInstance().apply {
+                timeInMillis = 0
+                set(Calendar.DAY_OF_YEAR, startDate.get(Calendar.DAY_OF_YEAR))
+                set(Calendar.YEAR, startDate.get(Calendar.YEAR))
+            }.timeInMillis
+            val end = Calendar.getInstance().apply {
+                timeInMillis = 0
+                set(Calendar.DAY_OF_YEAR, endDate.get(Calendar.DAY_OF_YEAR))
+                set(Calendar.YEAR, endDate.get(Calendar.YEAR))
+            }.timeInMillis
+            val differenceMillis = end - start
+            return TimeUnit.MILLISECONDS.toDays(differenceMillis).toInt()
         }
     }
 }
