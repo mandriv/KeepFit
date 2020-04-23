@@ -7,6 +7,7 @@ import com.mandriv.keepfit.data.steps.StepsRepository
 import com.mandriv.keepfit.viewmodel.goals.EditGoalViewModelFactory
 import com.mandriv.keepfit.viewmodel.goals.GoalsViewModelFactory
 import com.mandriv.keepfit.viewmodel.goals.NewGoalViewModelFactory
+import com.mandriv.keepfit.viewmodel.history.EditHistoryViewModelFactory
 import com.mandriv.keepfit.viewmodel.history.HistoryViewModelFactory
 import com.mandriv.keepfit.viewmodel.history.NewHistoryViewModelFactory
 import com.mandriv.keepfit.viewmodel.today.TodayViewModelFactory
@@ -73,6 +74,21 @@ object InjectorUtils {
         val stepsRepository = getStepsRepository(context)
         val goalRepository = getGoalsRepository(context)
         return NewHistoryViewModelFactory(stepsRepository, goalRepository)
+    }
+
+    fun provideEditHistoryViewModelFactory(
+        context: Context,
+        stepEntryId: Int,
+        goalId: Int
+    ): EditHistoryViewModelFactory {
+        val stepsRepository = getStepsRepository(context)
+        val goalRepository = getGoalsRepository(context)
+        return EditHistoryViewModelFactory(
+            stepsRepository,
+            goalRepository,
+            stepEntryId,
+            goalId
+        )
     }
 
 }

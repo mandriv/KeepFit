@@ -49,7 +49,14 @@ class GoalsFragment : FragmentWithSettingsMenu() {
         setupPreferences()
         adapter = GoalAdapter()
         binding.goalList.adapter = adapter
-        subscribeUi()
+        goalsViewModel.inactiveGoals.observe(viewLifecycleOwner) { goals ->
+            if (goals.isEmpty()) {
+                no_goals_text.visibility = View.VISIBLE
+            } else {
+                no_goals_text.visibility = View.INVISIBLE
+            }
+            adapter.submitList(goals)
+        }
         if (allowGoalAdd) {
             binding.fab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goals_to_newGoalDialogFragment))
         } else {
@@ -67,13 +74,6 @@ class GoalsFragment : FragmentWithSettingsMenu() {
         }
         if (allowGoalDelete) {
             enableSwipeToDeleteAndUndo()
-        }
-    }
-
-
-    private fun subscribeUi() {
-        goalsViewModel.inactiveGoals.observe(viewLifecycleOwner) { goals ->
-            adapter.submitList(goals)
         }
     }
 

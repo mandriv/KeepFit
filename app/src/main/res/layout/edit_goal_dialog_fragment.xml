@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
+                app:errorEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
           <com.google.android.material.textfield.TextInputEditText
@@ -70,6 +71,7 @@
                   android:digits="0123456789"
                   android:inputType="numberDecimal"
                   android:text="@={viewModel.newGoalValue}"
+                  android:maxLength="7"
           />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.checkbox.MaterialCheckBox

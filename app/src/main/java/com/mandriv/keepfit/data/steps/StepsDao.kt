@@ -19,6 +19,9 @@ interface StepsDao {
     @Query("SELECT * FROM steps WHERE date(addedAt) = date(:date) LIMIT 1")
     suspend fun getStepsAtDate(date: Calendar): StepsEntry
 
+    @Query("SELECT * FROM steps WHERE id = :id LIMIT 1")
+    fun getStepEntryById(id: Int): LiveData<StepsEntry>
+
     @Query(
         """
         SELECT 
@@ -39,7 +42,7 @@ interface StepsDao {
     suspend fun delete(stepsEntry: StepsEntry)
 
     @Update
-    fun update(stepsEntry: StepsEntry)
+    suspend fun update(stepsEntry: StepsEntry)
 
     @Insert
     suspend fun insert(stepsEntry: StepsEntry)

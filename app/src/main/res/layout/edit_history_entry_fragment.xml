@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
   <data>
-    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.history.NewHistoryViewModel"/>
+    <variable name="viewModel" type="com.mandriv.keepfit.viewmodel.history.EditHistoryViewModel"/>
   </data>
   <androidx.coordinatorlayout.widget.CoordinatorLayout
           xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -40,31 +40,11 @@
                     android:padding="16dp"
       >
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/date_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/date"
-                app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-          <com.google.android.material.textfield.TextInputEditText
-                  android:id="@+id/date_input"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:inputType="textNoSuggestions"
-                  android:clickable="true"
-                  android:focusable="true"
-                  android:text="@{viewModel.dateString}"
-          />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/goal_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/goal"
                 app:errorEnabled="true"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         >
           <AutoCompleteTextView

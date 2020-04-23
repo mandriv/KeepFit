@@ -1,15 +1,17 @@
 package com.mandriv.keepfit
 
+import android.content.ComponentName
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.os.IBinder
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.mandriv.ctnotifications.CTServiceActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : CTServiceActivity("com.mandriv.keepfit") {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +19,11 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             setupViews()
         } // Else, need to wait for onRestoreInstanceState
+    }
+
+    override fun onCTServiceConnected() {
+        super.onCTServiceConnected()
+        ctService!!.addTrigger("haha")
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

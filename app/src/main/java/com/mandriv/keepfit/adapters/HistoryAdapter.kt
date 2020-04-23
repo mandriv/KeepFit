@@ -2,14 +2,17 @@ package com.mandriv.keepfit.adapters
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mandriv.keepfit.data.steps.HistoryEntry
 import com.mandriv.keepfit.databinding.HistoryItemBinding
+import com.mandriv.keepfit.view.history.HistoryFragmentDirections
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -36,11 +39,10 @@ class HistoryAdapter : ListAdapter<HistoryEntry, RecyclerView.ViewHolder>(Histor
         init {
             binding.setClickListener {
                 binding.historyEntry?.let { historyEntry ->
-                    Log.i("AAA", historyEntry.id.toString())
+                    navigateToEntry(historyEntry.id, historyEntry.goalId, it)
                 }
             }
         }
-
 
         fun bind(item: HistoryEntry) {
             binding.apply {
@@ -69,6 +71,22 @@ class HistoryAdapter : ListAdapter<HistoryEntry, RecyclerView.ViewHolder>(Histor
                 percentageCompleted = "${item.percentageCompleted}%"
                 historyEntry = item
                 executePendingBindings()
+            }
+        }
+
+        private fun navigateToEntry(
+            stepEntryId: Int,
+            goalId: Int,
+            view: View
+        ) {
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(binding.root.context)
+            val allowEntryEdit = sharedPreferences.getBoolean("allow_history_edit", true)
+            if (allowEntryEdit) {
+                val direction = HistoryFragmentDirections.actionHistoryToEditHistoryDialogFragment(
+                    stepEntryId,
+                    goalId
+                )
+                view.findNavController().navigate(direction)
             }
         }
 

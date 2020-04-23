@@ -45,7 +45,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="@string/name"
-                  app:errorEnabled="@{viewModel.errorEnabled}"
+                  app:errorEnabled="true"
                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           >
             <com.google.android.material.textfield.TextInputEditText
@@ -61,7 +61,7 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="@string/steps"
-                  app:errorEnabled="@{viewModel.errorEnabled}"
+                  app:errorEnabled="true"
                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           >
             <com.google.android.material.textfield.TextInputEditText
@@ -70,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:digits="0123456789"
                     android:inputType="numberDecimal"
+                    android:maxLength="7"
                     android:text="@={viewModel.newGoalValue}"
             />
           </com.google.android.material.textfield.TextInputLayout>

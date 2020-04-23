@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:digits="0123456789"
             android:inputType="numberDecimal"
+            android:maxLength="5"
     />
   </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>

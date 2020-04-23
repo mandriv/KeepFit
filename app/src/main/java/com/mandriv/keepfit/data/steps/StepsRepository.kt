@@ -12,6 +12,14 @@ class StepsRepository private constructor(private val stepsDao: StepsDao) {
         return stepsDao.getTodayStepEntry()
     }
 
+    fun getEntryById(id: Int): LiveData<StepsEntry> {
+        return stepsDao.getStepEntryById(id)
+    }
+
+    suspend fun update(entry: StepsEntry) {
+        return stepsDao.update(entry)
+    }
+
     suspend fun delete(entry: StepsEntry) {
         return stepsDao.delete(entry)
     }
