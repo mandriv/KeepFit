@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':ctnotifications'
 rootProject.name='KeepFit'
