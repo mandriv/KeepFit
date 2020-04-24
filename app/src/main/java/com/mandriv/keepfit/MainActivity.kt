@@ -3,12 +3,14 @@ package com.mandriv.keepfit
 import android.content.ComponentName
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mandriv.ctnotifications.CTServiceActivity
+import com.mandriv.ctnotifications.data.Trigger
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : CTServiceActivity("com.mandriv.keepfit") {
@@ -23,7 +25,9 @@ class MainActivity : CTServiceActivity("com.mandriv.keepfit") {
 
     override fun onCTServiceConnected() {
         super.onCTServiceConnected()
-        ctService!!.addTrigger("haha")
+        val triggers = ctService!!.currentTriggers
+        Log.i("XD", triggers.size.toString())
+        // ctService!!.addTrigger(Trigger(this.packageName, "Custom Notification", "Hello I am notification!"))
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {

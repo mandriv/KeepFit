@@ -1,8 +1,10 @@
 // ICTService.aidl
 package com.mandriv.ctnotifications;
 
-// Declare any non-default types here with import statements
+import com.mandriv.ctnotifications.data.Trigger;
 
 interface ICTService {
-    void addTrigger(String config);
+    List<Trigger> getCurrentTriggers();
+
+    void addTrigger(in Trigger t);
 }
