@@ -8,10 +8,11 @@ import androidx.room.TypeConverters
 import com.mandriv.ctnotifications.utils.DATABASE_NAME
 
 
-@Database(entities = [Trigger::class], version = 2, exportSchema = false)
+@Database(entities = [Trigger::class, NotificationLog::class], version = 1, exportSchema = false)
 @TypeConverters(Conventers::class)
 abstract class ServiceDatabase: RoomDatabase() {
     abstract fun triggerDao(): TriggerDao
+    abstract fun notificationLogDao(): NotificationLogDao
 
     companion object {
 

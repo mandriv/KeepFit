@@ -1,6 +1,8 @@
 package com.mandriv.ctnotifications.data
 
 import androidx.room.TypeConverter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Conventers {
 
@@ -22,8 +24,28 @@ class Conventers {
             val name = values[0]
             val min = values[1].toIntOrNull()
             val max = values[2].toIntOrNull()
-            CustomNumericTrigger(name, min, max)
+            val currentValue = values[3].toIntOrNull()
+            CustomNumericTrigger(name, min, max, currentValue)
         }
+    }
 
+    private val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+
+    @TypeConverter
+    fun fromIsoString(value: String?): Calendar? {
+        return value?.let {
+            sdf.timeZone = TimeZone.getTimeZone("UTC")
+            val cal = Calendar.getInstance()
+            cal.time = sdf.parse(value)
+            return cal
+        }
+    }
+
+    @TypeConverter
+    fun toIsoString(date: Calendar?): String? {
+        return date?.let {
+            sdf.timeZone = TimeZone.getTimeZone("UTC")
+            return sdf.format(date.time)
+        }
     }
 }

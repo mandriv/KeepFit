@@ -7,4 +7,10 @@ interface ICTService {
     List<Trigger> getCurrentTriggers();
 
     void addTrigger(in Trigger t);
+
+    void removeTrigger(int triggerId);
+
+    void clearTriggers(String appPackage);
+
+    void updateCustomData(String appPackage, String dataName, int newValue);
 }
